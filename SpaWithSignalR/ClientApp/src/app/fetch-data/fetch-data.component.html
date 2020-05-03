@@ -1,0 +1,33 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!forecastsViewModel"><em>Loading...</em></p>
+
+
+<p *ngIf="forecastsViewModel"> Date: {{forecastsViewModel.date.toLocaleString()}}</p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecastsViewModel">
+  <thead>
+    <tr>
+      <th>Edit</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Temp. (C)</th>
+      <th>Temp. (F)</th>
+      <th>Sky</th>
+      <th>Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [ngClass]="pulsingText" (animationend)="pulsingText.pulsing=false" *ngFor="let forecast of forecastsViewModel.forecasts">
+      <td (click)="navigateToEdit(forecast.location)" ><span style="cursor: pointer"  class="glyphicon glyphicon-edit"></span></td>
+      <td>{{ forecast.location.country }}</td>
+      <td>{{ forecast.location.city }}</td>
+      <td>{{ forecast.temperatureC }}</td>
+      <td>{{ forecast.temperatureF }}</td>
+      <td>{{ forecast.sky }}</td>
+      <td>{{ forecast.summary }}</td>
+    </tr>
+  </tbody>
+</table>

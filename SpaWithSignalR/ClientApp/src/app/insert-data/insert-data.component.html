@@ -1,0 +1,65 @@
+
+<h1 *ngIf="viewModel.isEdit == false">Insert Wheater Conditions</h1>
+<h1 *ngIf="viewModel.isEdit == true">Edit Wheater Conditions</h1>
+
+<form *ngIf="viewModel.isEdit == false"  class="form-inline" style="margin:20px">
+  <div class="form-group" style="margin-right:10px;">
+    <label for="countriesoptions">Countries</label>
+    <select id="countriesoptions" name="countries" class="form-control" [(ngModel)]="viewModel.selectedCountry">
+      <option *ngFor="let country of viewModel.countries" [ngValue]="country">{{country}}</option>
+    </select>
+  </div>
+  <div class="form-group" style="margin-right:10px;">
+    <label for="dropdownregions">Regions</label>
+    <select id="dropdownregions" name="regions" class="form-control"  [(ngModel)]="viewModel.selectedRegion">
+      <option *ngFor="let region of viewModel.regions" [ngValue]="region">{{region}}</option>
+    </select>
+  </div>
+  <div class="form-group" style="margin-right:10px;">
+    <label for="cityoptions">City</label>
+    <select id="cityoptions" name="cities" class="form-control" [(ngModel)]="viewModel.selectedCity">
+      <option *ngFor="let city of viewModel.cities" [ngValue]="city">{{city}}</option>
+    </select>
+  </div>
+
+</form>
+
+<form *ngIf="viewModel.isEdit == true">
+  <div class="form-inline">
+    <div class="form-group ">
+      <div class="col-lg-12">
+        <label for="txt_country">Country</label>
+        <input disabled type="text" id="txtcountry" name="txt_country" class="form-control " [(ngModel)]="viewModel.selectedCountry">
+      </div>
+    </div>
+    <div class="form-group ">
+      <div class="col-lg-12">
+        <label for="txt_region">Region</label>
+        <input disabled type="text" id="txtregion" name="txt_region" class="form-control " [(ngModel)]="viewModel.selectedRegion">
+      </div>
+    </div>
+    <div class="form-group ">
+      <div class="col-lg-12">
+        <label for="txt_city">City</label>
+        <input disabled type="text" id="txtcity" name="txt_city" class="form-control " [(ngModel)]="viewModel.selectedCity">
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<form *ngIf="viewModel.skies" style="margin:20px">
+  <div class="form-group w-25">
+    <label for="temperature">Temperature</label>
+    <input type="number" name="temperatureInput" id="temperature" class="form-control"  [(ngModel)]="viewModel.selectedTemperature" placeholder="Enter the temperature">
+    <small id="temperatureHelp" class="form-text text-muted">Insert Celcius Temperature.</small>
+  </div>
+  <div class="form-group w-25">
+    <label for="skyOptions">Sky</label>
+    <select id="skyOptions" name="skies" class="form-control" [(ngModel)]="viewModel.selectedSky">
+      <option *ngFor="let sky of viewModel.skies" [ngValue]="sky">{{sky}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" (click)="submit()">Submit Weather</button>
+</form>
