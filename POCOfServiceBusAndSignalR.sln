@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Azure.Storage.Que
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Abstractions", "Abstractions\Application.Abstractions.csproj", "{E717DD66-914A-4C82-B1A6-73CE93C75826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Azure.ServiceBus.Subscriber", "Messaging.Azure.ServiceBus.Subscriber\Messaging.Azure.ServiceBus.Subscriber.csproj", "{9D6C5A4F-C0D7-4B3F-880B-13E5B06C3607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Azure.ServiceBus.Subscriber", "Messaging.Azure.ServiceBus.Subscriber\Messaging.Azure.ServiceBus.Subscriber.csproj", "{9D6C5A4F-C0D7-4B3F-880B-13E5B06C3607}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Abstractions", "Messaging.Abstractions\Messaging.Abstractions.csproj", "{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Abstractions", "Messaging.Abstractions\Messaging.Abstractions.csproj", "{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Repository.MongoDb", "Application.Repository.MongoDb\Application.Repository.MongoDb.csproj", "{8B900F6F-3765-4A44-B172-88DBEA3A8C70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B900F6F-3765-4A44-B172-88DBEA3A8C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B900F6F-3765-4A44-B172-88DBEA3A8C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B900F6F-3765-4A44-B172-88DBEA3A8C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B900F6F-3765-4A44-B172-88DBEA3A8C70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
