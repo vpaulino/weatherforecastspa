@@ -33,19 +33,29 @@ export class SignalRApplicationClient
       .build();
 
     connection.start().then(function () {
-      console.log('SignalR Connected!');
+      console.log('SignalR Connected! Timeout ' + connection.serverTimeoutInMilliseconds);
+      
     }).catch(function (err) {
       return console.error(err.toString());
     });
 
+    connection.onclose((error) => { console.log(`SignalR On Close Fired ${error}`); });
+        
+
     connection.on("BroadcastWeatherForecast", (mssg) => {
+      console.log(`SignalR BroadcastWeatherForecast fired ${mssg}`)
+      if (this.weatherForecastReceived.observers.length == 0)
+        return;
+
       this.weatherForecastReceived.next(mssg);
     });
 
     connection.on("BroadcastRecomendations", (mssg) => {
-      console.log(`BroadcastRecomendations - ${mssg}`);
-      this.recomendationsReceived.next(mssg);
+      console.log(`SignalR BroadcastRecomendations fired ${mssg}`)
+      if (this.recomendationsReceived.observers.length == 0)
+        return;
 
+      this.recomendationsReceived.next(mssg);
     });
 
   }

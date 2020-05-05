@@ -4,6 +4,7 @@ import { IWeatherConditionRecomendation } from '../viewModels/recomendationViewM
 import { SignalRApplicationClient } from '../services/signalrApplicationClient.service';
 import { ComponentEventsBus } from '../services/componentEventsBus.service';
 import { ComponentEvent, ComponentState } from '../viewModels/componentEvent';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'recomendation-data',
@@ -18,10 +19,11 @@ export class RecomendationDataComponent {
   private baseUrl: string;
   private signalRClient: SignalRApplicationClient;
   private componentEventsBus: ComponentEventsBus;
+  private recomendationsSubscription: Subscription;
 
   ngOnDestroy(): void {
     this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
-
+    this.recomendationsSubscription.unsubscribe();
   }
 
 
@@ -41,8 +43,10 @@ export class RecomendationDataComponent {
 
     this.signalRClient.Init();
 
-    this.signalRClient.recomendationsReceived.subscribe((weatherConditionRecomendation) => this.databind(weatherConditionRecomendation));
+    this.recomendationsSubscription = this.signalRClient.recomendationsReceived.subscribe((weatherConditionRecomendation) => this.databind(weatherConditionRecomendation));
   }
+
+  
 
   private databind(recomendationEvent: IWeatherConditionRecomendation)
   {

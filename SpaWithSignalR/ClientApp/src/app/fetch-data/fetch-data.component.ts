@@ -8,6 +8,7 @@ import { SignalRApplicationClient } from '../services/signalrApplicationClient.s
 import { Location } from '../viewModels/location';
 import { NavigationExtras, ActivatedRoute, Router } from '@angular/router';
 import { WeatherForecastHttpClient } from '../services/weatherforecast.httpclient';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fetch-data',
@@ -39,6 +40,7 @@ export class FetchDataComponent {
   private componentEventsBus: ComponentEventsBus;
   private signalRClient: SignalRApplicationClient;
   private router: Router;
+  private weatherForecastSubscription: Subscription;
 
   public pulsingText = {
     pulsing: false
@@ -52,6 +54,7 @@ export class FetchDataComponent {
 
   ngOnDestroy(): void {
     this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
+    this.weatherForecastSubscription.unsubscribe();
   }
 
 
@@ -74,7 +77,7 @@ export class FetchDataComponent {
   
     }).finally(() =>
     {
-      this.signalRClient.weatherForecastReceived.subscribe((weatherForecastReceived) => this.databind(weatherForecastReceived));
+      this.weatherForecastSubscription = this.signalRClient.weatherForecastReceived.subscribe((weatherForecastReceived) => this.databind(weatherForecastReceived));
 
     });
   }

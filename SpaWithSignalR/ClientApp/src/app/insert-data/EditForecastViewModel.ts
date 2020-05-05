@@ -34,6 +34,23 @@ export class EditForecastViewModel {
     this.dataBindSelectedLocation(locations[0]);
   }
 
+  public EqualsTo(location: Location): boolean {
+
+    if ((location.city == undefined || location.city == null) &&
+      (location.country == undefined || location.country == null) &&
+      (location.region == undefined || location.region == null)
+    ) {
+      return false;
+    }
+
+    if (this.selectedRegion == null || this.selectedCountry == null || this.selectedCity == null)
+      return false;
+
+    return this.selectedCity == location.city && this.selectedCountry == location.country && this.selectedRegion == location.region;
+  }
+
+
+
   public dataBind(forecast: WeatherForecast) {
 
     if (forecast.location == null)

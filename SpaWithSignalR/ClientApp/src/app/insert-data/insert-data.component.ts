@@ -7,6 +7,8 @@ import { ComponentEventsBus } from '../services/componentEventsBus.service';
 import { ComponentEvent, ComponentState } from '../viewModels/componentEvent';
 import { WeatherForecastHttpClient } from '../services/weatherforecast.httpclient';
 import { EditForecastViewModel } from './EditForecastViewModel';
+import { SignalRApplicationClient } from '../services/signalrApplicationClient.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'insert-data.component',
@@ -15,18 +17,16 @@ import { EditForecastViewModel } from './EditForecastViewModel';
 export class InsertDataComponent {
 
 
-  private baseUrl: string;
-  private httpClient: HttpClient;
   private componentEventsBus: ComponentEventsBus;
-
   public viewModel: EditForecastViewModel;
-
   private weatherForecastHttpClient: WeatherForecastHttpClient;
-
   private activatedRoute: ActivatedRoute;
+  private signalRClient: SignalRApplicationClient;
+  private weatherForecastSubscription: Subscription;
 
   ngOnDestroy(): void {
     this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
+    this.weatherForecastSubscription.unsubscribe();
   }
 
   private disableDataKeyControls() {
@@ -50,11 +50,10 @@ export class InsertDataComponent {
           var location = this.GetFormStateFromQueryParameters(params);
           var promiseResult = this.weatherForecastHttpClient.getForecastByLocation(location);
           promiseResult.then((forecast) => {
-            this.databindForecast(forecast);
+            this.databindViewModel(forecast);
             this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.success, "data init success", {}));
           }).catch(reason => {
             this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.error, `data init failed ${reason}`, {}));
-
           });
         }
       }).catch((reason) => {
@@ -65,11 +64,12 @@ export class InsertDataComponent {
   }
 
 
-  constructor(route: ActivatedRoute, componentEventsBus: ComponentEventsBus, weatherForecastHttpClient: WeatherForecastHttpClient) {
+  constructor(route: ActivatedRoute, componentEventsBus: ComponentEventsBus, weatherForecastHttpClient: WeatherForecastHttpClient, signalRClient: SignalRApplicationClient) {
     this.weatherForecastHttpClient = weatherForecastHttpClient;
     this.componentEventsBus = componentEventsBus;
     this.activatedRoute = route;
     this.viewModel = new EditForecastViewModel();
+    this.signalRClient = signalRClient;
   }
 
 
@@ -81,7 +81,7 @@ export class InsertDataComponent {
     return locationQueryParam;
   }
 
-  private databindForecast(forecastEvent: WeatherForecast) {
+  private databindViewModel(forecastEvent: WeatherForecast) {
 
     this.viewModel.dataBind(forecastEvent);
   }
@@ -95,6 +95,7 @@ export class InsertDataComponent {
     var promise = Promise.all([allLocationsPromise, allSkiesPromise]).then((allPromisses) => {
       this.viewModel.dataBindLocations(allPromisses[0]);
       this.viewModel.dataBindSkies(allPromisses[1]);
+      this.subscribeSignalR();
       this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.success, "All Initial data was fetch with sucess", {}));
     }).catch((reason) => {
       this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.error, `Not all Initial data was not fetch ${reason} `, {}));
@@ -102,6 +103,19 @@ export class InsertDataComponent {
     return promise;
   }
 
+  
+  private subscribeSignalR() {
+    
+     this.weatherForecastSubscription = this.signalRClient.weatherForecastReceived.subscribe((weatherForecastReceived) => {
+        
+        if (this.viewModel.EqualsTo(weatherForecastReceived.location))
+        {
+          this.componentEventsBus.publishEvent(new ComponentEvent("dataAlreadySubmited", ComponentState.warning, "Someone recently submited data in this location, do you want to continue?", {}));
+        }
+     });
+  }
+
+  
 
 
   public submit() {
