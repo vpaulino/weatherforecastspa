@@ -69,10 +69,10 @@ The  output binding  is the place to were the return of the function is going to
 
 ```
 "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=sdtstoragelabs;AccountKey=6Q0dWyO5kkMXwZVau2uChoTbHbOPptLclCQbsQoslCw5SDm2VTq9L9xWEGXon4lNaU8GLxLz0PBZPN1EXtkclg==;BlobEndpoint=https://sdtstoragelabs.blob.core.windows.net/;TableEndpoint=https://sdtstoragelabs.table.core.windows.net/;QueueEndpoint=https://sdtstoragelabs.queue.core.windows.net/;FileEndpoint=https://sdtstoragelabs.file.core.windows.net/",
+    "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "AppEventsQueue": "appevents-queue",
-    "ServiceBusConnection": "Endpoint=sb://sdtservicebus-lab.servicebus.windows.net/;SharedAccessKeyName=publisherPolicy;SharedAccessKey=pxZhPuNU/gZbg4CL87jdKxTdlAcmNPSfyAqsPy6kgfM=",
+    "ServiceBusConnection": "",
     "AppEvents-Topic": "sdtappevents-sb-topics"
   }
 ```
