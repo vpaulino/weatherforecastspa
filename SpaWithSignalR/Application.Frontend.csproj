@@ -24,6 +24,7 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="ClientApp\src\app\auth-data\auth-data.component.ts" />
     <None Remove="ClientApp\src\app\images-display\image-display.component.ts" />
     <None Remove="ClientApp\src\app\images-display\ImageDisplayViewModel.ts" />
     <None Remove="ClientApp\src\app\services\componentEventsBus.service.ts" />
@@ -43,6 +44,7 @@
     <ProjectReference Include="..\Messaging.Azure.Storage.Queues\Messaging.Azure.Storage.Queues.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\auth-data\auth-data.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\images-display\image-display.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\images-display\ImageDisplayViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\componentEventsBus.service.ts" />

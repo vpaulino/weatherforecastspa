@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthComponent } from '../auth-data/auth-data.component'
 
 @Component({
   selector: 'app-nav-menu',

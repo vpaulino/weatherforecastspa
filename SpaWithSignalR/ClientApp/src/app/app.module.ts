@@ -18,6 +18,7 @@ import { Routes } from '@angular/router';
 import { WeatherForecastHttpClient } from './services/weatherforecast.httpclient';
 import { UploadComponent } from './uploadfiles/upload-file.component';
 import { ImageDisplayComponent } from './images-display/image-display.component';
+import { AuthComponent } from './auth-data/auth-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ImageDisplayComponent } from './images-display/image-display.component'
     RecomendationDataComponent,
     StateMenuComponent,
     UploadComponent,
-    ImageDisplayComponent
+    ImageDisplayComponent,
+    AuthComponent
     
   ],
   imports: [
