@@ -1,0 +1,17 @@
+<div class="row" style="margin-bottom:15px;">
+  <div class="form-group">
+    <label for="fileToAdd">Upload your sky images</label>
+    <input type="file" #file placeholder="Choose file" (change)="addFile(file.files)" style="display:none;">
+    <button type="button" id="fileToAdd" class="btn btn-success form-control" (click)="file.click()">Select File</button>
+    <button *ngIf="viewModel.filesAdded()" type="button" class="btn btn-secondary" (click)="clearAllFiles()">Cancel Files</button>
+  </div>
+  <img-display *ngIf="viewModel.filesAdded()" [viewModel]="viewModel.images"></img-display>
+  <div>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>

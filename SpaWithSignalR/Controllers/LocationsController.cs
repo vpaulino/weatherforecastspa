@@ -33,5 +33,8 @@ namespace Application.Frontend.Controllers
            
             return Ok(locations);
         }
+
+
+
     }
 }

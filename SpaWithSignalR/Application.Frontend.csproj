@@ -24,9 +24,13 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="ClientApp\src\app\images-display\image-display.component.ts" />
+    <None Remove="ClientApp\src\app\images-display\ImageDisplayViewModel.ts" />
     <None Remove="ClientApp\src\app\services\componentEventsBus.service.ts" />
     <None Remove="ClientApp\src\app\services\signalrApplicationClient.service.ts" />
     <None Remove="ClientApp\src\app\services\weatherforecast.httpclient.ts" />
+    <None Remove="ClientApp\src\app\uploadfiles\upload-file.component.ts" />
+    <None Remove="ClientApp\src\app\uploadfiles\UploadFileViewModel.ts" />
     <None Remove="ClientApp\src\app\viewModels\ComponentEvent.ts" />
     <None Remove="ClientApp\src\app\viewModels\location.ts" />
     <None Remove="ClientApp\src\app\viewModels\recomendationViewModel.ts" />
@@ -39,9 +43,13 @@
     <ProjectReference Include="..\Messaging.Azure.Storage.Queues\Messaging.Azure.Storage.Queues.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\images-display\image-display.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\images-display\ImageDisplayViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\componentEventsBus.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\signalrApplicationClient.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\weatherforecast.httpclient.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\uploadfiles\upload-file.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\uploadfiles\UploadFileViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\viewModels\componentEvent.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\viewModels\location.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\viewModels\recomendationViewModel.ts" />
@@ -66,7 +74,7 @@
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
       <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

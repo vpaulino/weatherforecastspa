@@ -15,7 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Azure.ServiceBus.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Abstractions", "Messaging.Abstractions\Messaging.Abstractions.csproj", "{B7F1FCE6-CE66-44B8-9B9F-2ABC989736CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Repository.MongoDb", "Application.Repository.MongoDb\Application.Repository.MongoDb.csproj", "{8B900F6F-3765-4A44-B172-88DBEA3A8C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Repository.MongoDb", "Application.Repository.MongoDb\Application.Repository.MongoDb.csproj", "{8B900F6F-3765-4A44-B172-88DBEA3A8C70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F56FED18-0174-4D9E-98D0-9300403B0255}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
