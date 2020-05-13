@@ -10,5 +10,5 @@ import { ImageViewModel } from '../viewModels/ImageViewModel';
 })
 export class ImageDisplayComponent {
 
-  @Input("viewModel") viewModel : ImageViewModel[]
+  @Input('viewModel') viewModel : ImageViewModel[]
 }

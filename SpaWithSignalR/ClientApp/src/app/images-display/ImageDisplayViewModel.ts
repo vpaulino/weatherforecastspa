@@ -1,4 +1,4 @@
-import { ImageViewModel } from "../viewModels/ImageViewModel";
+import { ImageViewModel } from '../viewModels/ImageViewModel';
 
 
 

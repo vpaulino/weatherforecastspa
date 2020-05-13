@@ -11,10 +11,10 @@ export class ComponentEventsBus
 
   }
 
-  public componentEventsReceived = new BehaviorSubject<IComponentEvent>(new ComponentEvent("EventBusCreated", ComponentState.idle, "EventBus created ready to receive events", {}));
+  public componentEventsReceived = new BehaviorSubject<IComponentEvent>(new ComponentEvent('EventBusCreated', ComponentState.idle, 'EventBus created ready to receive events', {}));
 
   public publishEvent(componentEvent: IComponentEvent) {
-    console.log("ComponentEventsBus event fired: " + componentEvent.toString());
+    console.log('ComponentEventsBus event fired: ' + componentEvent.toString());
     this.componentEventsReceived.next(componentEvent);
   }
 }

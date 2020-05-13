@@ -25,7 +25,7 @@ export class InsertDataComponent {
   private weatherForecastSubscription: Subscription;
 
   ngOnDestroy(): void {
-    this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('componentDestroy', ComponentState.idle, 'leaving component', {}));
     this.weatherForecastSubscription.unsubscribe();
   }
 
@@ -51,13 +51,13 @@ export class InsertDataComponent {
           var promiseResult = this.weatherForecastHttpClient.getForecastByLocation(location);
           promiseResult.then((forecast) => {
             this.databindViewModel(forecast);
-            this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.success, "data init success", {}));
+            this.componentEventsBus.publishEvent(new ComponentEvent('componentInitialized', ComponentState.success, 'data init success', {}));
           }).catch(reason => {
-            this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.error, `data init failed ${reason}`, {}));
+            this.componentEventsBus.publishEvent(new ComponentEvent('componentInitialized', ComponentState.error, `data init failed ${reason}`, {}));
           });
         }
       }).catch((reason) => {
-        this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.error, `init locations failed ${reason}`, {}));
+        this.componentEventsBus.publishEvent(new ComponentEvent('componentInitialized', ComponentState.error, `init locations failed ${reason}`, {}));
       });
     });
 
@@ -96,9 +96,9 @@ export class InsertDataComponent {
       this.viewModel.dataBindLocations(allPromisses[0]);
       this.viewModel.dataBindSkies(allPromisses[1]);
       this.subscribeSignalR();
-      this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.success, "All Initial data was fetch with sucess", {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('componentInitialized', ComponentState.success, 'All Initial data was fetch with sucess', {}));
     }).catch((reason) => {
-      this.componentEventsBus.publishEvent(new ComponentEvent("componentInitialized", ComponentState.error, `Not all Initial data was not fetch ${reason} `, {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('componentInitialized', ComponentState.error, `Not all Initial data was not fetch ${reason} `, {}));
     });
     return promise;
   }
@@ -110,7 +110,7 @@ export class InsertDataComponent {
         
         if (this.viewModel.EqualsTo(weatherForecastReceived.location))
         {
-          this.componentEventsBus.publishEvent(new ComponentEvent("dataAlreadySubmited", ComponentState.warning, "Someone recently submited data in this location, do you want to continue?", {}));
+          this.componentEventsBus.publishEvent(new ComponentEvent('dataAlreadySubmited', ComponentState.warning, 'Someone recently submited data in this location, do you want to continue?', {}));
         }
      });
   }
@@ -122,14 +122,14 @@ export class InsertDataComponent {
 
     var dataToSubmit = this.viewModel.getFormData();
 
-    this.componentEventsBus.publishEvent(new ComponentEvent("SubmitingEntity", ComponentState.information, "Weather forcast is being created...", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('SubmitingEntity', ComponentState.information, 'Weather forcast is being created...', {}));
 
     var promiseResult = this.weatherForecastHttpClient.SetForecastByLocation(dataToSubmit);
     promiseResult.then(result => {
-      this.componentEventsBus.publishEvent(new ComponentEvent("EntitySubmitted", ComponentState.success, "Weather forcast is Submited with success", {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('EntitySubmitted', ComponentState.success, 'Weather forcast is Submited with success', {}));
     });
     promiseResult.catch(reason => {
-      this.componentEventsBus.publishEvent(new ComponentEvent("EntitySubmitted", ComponentState.error, "Weather forcast request result into error", {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('EntitySubmitted', ComponentState.error, 'Weather forcast request result into error', {}));
     });
   }
 }

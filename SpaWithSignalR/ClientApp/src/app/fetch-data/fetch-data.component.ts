@@ -53,13 +53,13 @@ export class FetchDataComponent {
 
 
   ngOnDestroy(): void {
-    this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('componentDestroy', ComponentState.idle, 'leaving component', {}));
     this.weatherForecastSubscription.unsubscribe();
   }
 
 
   ngOnInit(): void {
-    this.componentEventsBus.publishEvent(new ComponentEvent("componentInit", ComponentState.idle, "list data init", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('componentInit', ComponentState.idle, 'list data init', {}));
 
     this.signalRClient.Init();
     
@@ -67,18 +67,16 @@ export class FetchDataComponent {
 
     forecastsPromise.then((forecastsReturned) =>
     {
-      this.componentEventsBus.publishEvent(new ComponentEvent("DataReceived", ComponentState.success, "Temperatures Received", {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('DataReceived', ComponentState.success, 'Temperatures Received', {}));
 
       this.forecastsViewModel = forecastsReturned;
+      this.weatherForecastSubscription = this.signalRClient.weatherForecastReceived.subscribe((weatherForecastReceived) => this.databind(weatherForecastReceived));
+
   
     }).catch(reason =>
     {
-      this.componentEventsBus.publishEvent(new ComponentEvent("DataReceived", ComponentState.error, `Getting temperatures thrown error ${reason}` , {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('DataReceived', ComponentState.error, `Getting temperatures thrown error ${reason}` , {}));
   
-    }).finally(() =>
-    {
-      this.weatherForecastSubscription = this.signalRClient.weatherForecastReceived.subscribe((weatherForecastReceived) => this.databind(weatherForecastReceived));
-
     });
   }
 

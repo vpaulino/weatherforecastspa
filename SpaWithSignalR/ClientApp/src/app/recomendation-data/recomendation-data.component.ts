@@ -22,23 +22,23 @@ export class RecomendationDataComponent {
   private recomendationsSubscription: Subscription;
 
   ngOnDestroy(): void {
-    this.componentEventsBus.publishEvent(new ComponentEvent("componentDestroy", ComponentState.idle, "leaving component", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('componentDestroy', ComponentState.idle, 'leaving component', {}));
     this.recomendationsSubscription.unsubscribe();
   }
 
 
   ngOnInit(): void {
-    this.componentEventsBus.publishEvent(new ComponentEvent("componentInit", ComponentState.idle, "recomendations init", {}));
+    this.componentEventsBus.publishEvent(new ComponentEvent('componentInit', ComponentState.idle, 'recomendations init', {}));
     this.recomendationsViewModel = [];
     var forecastsPromise = this.getActiveRecomendations();
     forecastsPromise.then((recomendations) =>
     {
-      this.componentEventsBus.publishEvent(new ComponentEvent("DataReceived", ComponentState.success, "Recomendations Received", {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('DataReceived', ComponentState.success, 'Recomendations Received', {}));
       this.recomendationsViewModel = recomendations;
 
     }).catch(reason =>
     {
-      this.componentEventsBus.publishEvent(new ComponentEvent("DataReceived", ComponentState.error, `Getting recomendations thrown error ${reason}`, {}));
+      this.componentEventsBus.publishEvent(new ComponentEvent('DataReceived', ComponentState.error, `Getting recomendations thrown error ${reason}`, {}));
     });
 
     this.signalRClient.Init();

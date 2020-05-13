@@ -42,7 +42,7 @@ export class SignalRApplicationClient
     connection.onclose((error) => { console.log(`SignalR On Close Fired ${error}`); });
         
 
-    connection.on("BroadcastWeatherForecast", (mssg) => {
+    connection.on('BroadcastWeatherForecast', (mssg) => {
       console.log(`SignalR BroadcastWeatherForecast fired ${mssg}`)
       if (this.weatherForecastReceived.observers.length == 0)
         return;
@@ -50,7 +50,7 @@ export class SignalRApplicationClient
       this.weatherForecastReceived.next(mssg);
     });
 
-    connection.on("BroadcastRecomendations", (mssg) => {
+    connection.on('BroadcastRecomendations', (mssg) => {
       console.log(`SignalR BroadcastRecomendations fired ${mssg}`)
       if (this.recomendationsReceived.observers.length == 0)
         return;
